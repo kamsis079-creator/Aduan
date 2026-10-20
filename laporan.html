@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Penuh - Sistem Aduan Kamsis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; line-height: 1.6; }
+        .container { max-width: 1400px; margin: 2rem auto; padding: 0 1rem; }
+
+        header { text-align: center; background-color: #003366; color: white; padding: 2rem; border-radius: 8px 8px 0 0; position: relative; }
+
+        .header-buttons { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; }
+        .btn-nav { background-color: #e67e22; color: white; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-weight: bold; transition: 0.3s; }
+        .btn-nav:hover { background-color: #d35400; }
+        .btn-logout { background-color: #c0392b; color: white; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-weight: bold; transition: 0.3s; }
+        .btn-logout:hover { background-color: #e74c3c; }
+
+        /* GRID FOR MINI REPORTS */
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 2rem 0; }
+        .summary-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #003366; }
+        .summary-card h3 { color: #003366; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 1.1rem; }
+
+        .mini-table { width: 100%; border-collapse: collapse; }
+        .mini-table th, .mini-table td { padding: 8px; border-bottom: 1px solid #f1f2f6; text-align: left; }
+        .mini-table th { color: #666; font-weight: 600; width: 70%; }
+        .mini-table td { font-weight: bold; color: #e67e22; text-align: right; }
+        .sub-header { background-color: #f8f9fa; font-style: italic; color: #555 !important; }
+
+        /* MAIN MONTHLY TABLE */
+        .table-section { background: white; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-radius: 8px; margin-bottom: 2rem; }
+
+        .table-header-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .table-header-row h2 { color: #003366; margin: 0; border: none; padding: 0; }
+        .btn-export { background-color: #27ae60; color: white; text-decoration: none; padding: 8px 15px; border-radius: 4px; font-weight: bold; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: none;}
+        .btn-export:hover { background-color: #2ecc71; }
+
+        .main-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .main-table th, .main-table td { padding: 12px; text-align: center; border-bottom: 1px solid #ddd; font-size: 0.95rem; vertical-align: top;}
+        .main-table th { background-color: #f8f9fa; color: #003366; }
+
+        .col-bulan { text-align: left !important; font-weight: bold; font-size: 1.1rem; }
+        .col-total { font-weight: bold; background-color: #f1f2f6; font-size: 1.2rem;}
+        .text-left { text-align: left !important; }
+
+        @media (max-width: 768px) {
+            .header-buttons { position: static; justify-content: center; margin-bottom: 15px; }
+            header { padding: 1.5rem 1rem; }
+            .table-header-row { flex-direction: column; gap: 15px; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-buttons">
+                <a href="admin.html" class="btn-nav">&larr; Kembali Dashboard</a>
+                <a href="logout.html" class="btn-logout">Log Keluar &times;</a>
+            </div>
+            <h1>Laporan Penuh Kerosakan Kamsis</h1>
+            <p>Politeknik Muadzam Shah (PMS)</p>
+        </header>
+
+        <!-- TOP SUMMARY GRID (Populated with sample static data) -->
+        <div class="summary-grid">
+
+            <!-- CARD 1: KATEGORI -->
+            <div class="summary-card">
+                <h3>Statistik Kategori Kerosakan</h3>
+                <table class="mini-table">
+                    <tr>
+                        <th>Elektrik</th>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <th>Paip</th>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <th>Perabot</th>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <th>Lain-lain</th>
+                        <td>2</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- CARD 2: BLOK & JANTINA -->
+            <div class="summary-card">
+                <h3>Statistik Mengikut Blok</h3>
+                <table class="mini-table">
+                    <!-- Lelaki -->
+                    <tr><th colspan="2" class="sub-header">Asrama Lelaki</th></tr>
+                    <tr><th>Blok A</th><td>7</td></tr>
+                    <tr><th>Blok B</th><td>5</td></tr>
+
+                    <!-- Perempuan -->
+                    <tr><th colspan="2" class="sub-header" style="border-top: 2px solid #ddd;">Asrama Perempuan</th></tr>
+                    <tr><th>Blok C</th><td>9</td></tr>
+                    <tr><th>Blok D</th><td>4</td></tr>
+                    <tr><th>Blok E</th><td>2</td></tr>
+                </table>
+            </div>
+
+            <!-- CARD 3: TINGKAT SEPARATED BY GENDER -->
+            <div class="summary-card">
+                <h3>Statistik Mengikut Aras (Tingkat)</h3>
+                <table class="mini-table">
+                    <!-- Lelaki -->
+                    <tr><th colspan="2" class="sub-header">Asrama Lelaki</th></tr>
+                    <tr><th>Ground Floor (G)</th><td>3</td></tr>
+                    <tr><th>Tingkat 1</th><td>4</td></tr>
+                    <tr><th>Tingkat 2</th><td>2</td></tr>
+                    <tr><th>Tingkat 3</th><td>2</td></tr>
+                    <tr><th>Tingkat 4</th><td>1</td></tr>
+
+                    <!-- Perempuan -->
+                    <tr><th colspan="2" class="sub-header" style="border-top: 2px solid #ddd;">Asrama Perempuan</th></tr>
+                    <tr><th>Ground Floor (G)</th><td>4</td></tr>
+                    <tr><th>Tingkat 1</th><td>5</td></tr>
+                    <tr><th>Tingkat 2</th><td>3</td></tr>
+                    <tr><th>Tingkat 3</th><td>2</td></tr>
+                    <tr><th>Tingkat 4</th><td>1</td></tr>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM DATA TABLE (MONTHLY SUMMARY) -->
+        <section class="table-section">
+            <div class="table-header-row">
+                <h2>Rekod Aduan Mengikut Bulan</h2>
+
+                <!-- EXCEL DOWNLOAD BUTTON (Static dummy button) -->
+                <button type="button" class="btn-export" onclick="alert('Fungsi muat turun hanya tersedia dalam versi PHP penuh.')">&#128190; Muat Turun Excel</button>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="main-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Bulan & Tahun</th>
+                            <th>Jum. Keseluruhan</th>
+                            <th style="color: #0984e3;">Jum. Lelaki</th>
+                            <th style="color: #e84393;">Jum. Perempuan</th>
+                            <th>Statistik Kategori Kerosakan</th>
+                            <th>Statistik Mengikut Blok</th>
+                            <th>Statistik Mengikut Aras</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Row 1 -->
+                        <tr>
+                            <td class="col-bulan">Oktober 2026</td>
+                            <td class="col-total">15</td>
+                            <td style="color: #0984e3; font-weight:bold;">7</td>
+                            <td style="color: #e84393; font-weight:bold;">8</td>
+                            <td class="text-left">
+                                <strong>Elektrik:</strong> 6<br>
+                                <strong>Paip:</strong> 5<br>
+                                <strong>Perabot:</strong> 4
+                            </td>
+                            <td class="text-left">
+                                <strong>Blok A:</strong> 4<br>
+                                <strong>Blok B:</strong> 3<br>
+                                <strong>Blok C:</strong> 5<br>
+                                <strong>Blok D:</strong> 3
+                            </td>
+                            <td class="text-left">
+                                <strong>Ground:</strong> 3<br>
+                                <strong>Tgkt 1:</strong> 5<br>
+                                <strong>Tgkt 2:</strong> 4<br>
+                                <strong>Tgkt 3:</strong> 2<br>
+                                <strong>Tgkt 4:</strong> 1
+                            </td>
+                        </tr>
+                        
+                        <!-- Sample Row 2 -->
+                        <tr>
+                            <td class="col-bulan">September 2026</td>
+                            <td class="col-total">12</td>
+                            <td style="color: #0984e3; font-weight:bold;">5</td>
+                            <td style="color: #e84393; font-weight:bold;">7</td>
+                            <td class="text-left">
+                                <strong>Elektrik:</strong> 6<br>
+                                <strong>Paip:</strong> 3<br>
+                                <strong>Perabot:</strong> 1<br>
+                                <strong>Lain-lain:</strong> 2
+                            </td>
+                            <td class="text-left">
+                                <strong>Blok A:</strong> 3<br>
+                                <strong>Blok B:</strong> 2<br>
+                                <strong>Blok C:</strong> 4<br>
+                                <strong>Blok D:</strong> 1<br>
+                                <strong>Blok E:</strong> 2
+                            </td>
+                            <td class="text-left">
+                                <strong>Ground:</strong> 4<br>
+                                <strong>Tgkt 1:</strong> 4<br>
+                                <strong>Tgkt 2:</strong> 1<br>
+                                <strong>Tgkt 3:</strong> 2<br>
+                                <strong>Tgkt 4:</strong> 1
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
